@@ -16,18 +16,15 @@
     <div id="viz"></div>
     <script type="text/babel">
       let data = [
-        {id: 1, name: "Snapchat"},
-        {id: 2, name: "Facebook"}
+        {id: 1, name: "Snapchat", img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Snapchat_Logo.png/480px-Snapchat_Logo.png'},
+        {id: 2, name: "Facebook", img: 'https://www.facebookbrand.com/img/fb-art.jpg'}
       ];
 
       let Vendor = React.createClass({
         render: function() {
+          console.log(this.props.img);
           return (
-            <div className='vendor'>
-              <h2 className='vendorName'>
-                {this.props.vendor}
-              </h2>
-            </div>
+            <img className='vendorImg' src={this.props.img} alt='Vendor Logo' />
           );
         }
       });
@@ -36,9 +33,7 @@
         render: function() {
           let vendorNodes = this.props.data.map(function(vendor) {
             return (
-              <Vendor vendor={vendor.name} key={vendor.id}>
-                {vendor.name}
-              </Vendor>
+              <Vendor img={vendor.img} key={vendor.id} />
             );
           });
           return (
@@ -66,7 +61,7 @@
       );
     </script>
     <script>
-
+      // don't use React with D3 for now...
     </script>
   </body>
 </html>
