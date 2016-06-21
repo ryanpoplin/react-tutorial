@@ -3,20 +3,70 @@
   <head>
     <meta charset="utf-8">
     <title>React Tutorial</title>
-    <!-- Not present in the tutorial. Just for basic styling. -->
     <link rel="stylesheet" href="css/base.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.16/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
   </head>
   <body>
     <div id="content"></div>
-    <script type="text/babel" src="scripts/example.js"></script>
+    <div id="viz"></div>
     <script type="text/babel">
-      // To get started with this tutorial running your own code, simply remove
-      // the script tag loading scripts/example.js and start writing code here.
+      let data = [
+        {id: 1, name: "Snapchat"},
+        {id: 2, name: "Facebook"}
+      ];
+
+      let Vendor = React.createClass({
+        render: function() {
+          return (
+            <div className='vendor'>
+              <h2 className='vendorName'>
+                {this.props.vendor}
+              </h2>
+            </div>
+          );
+        }
+      });
+
+      let VendorList = React.createClass({
+        render: function() {
+          let vendorNodes = this.props.data.map(function(vendor) {
+            return (
+              <Vendor vendor={vendor.name} key={vendor.id}>
+                {vendor.name}
+              </Vendor>
+            );
+          });
+          return (
+            <div className='vendorList'>
+              {vendorNodes}
+            </div>
+          );
+        }
+      });
+
+      let VendorBox = React.createClass({
+        render: function() {
+          return (
+            <div className='vendorBox'>
+              <h1>OPRA</h1>
+              <VendorList data={this.props.data} />
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <VendorBox data={data} />,
+        document.getElementById('content')
+      );
+    </script>
+    <script>
+
     </script>
   </body>
 </html>
